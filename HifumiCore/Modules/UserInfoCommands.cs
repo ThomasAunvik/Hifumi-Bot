@@ -3,6 +3,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -118,6 +119,20 @@ namespace Hifumi_Bot.Modules
                     }
                     server.SaveData();
                 }
+            }
+        }
+
+        private EmailAddressAttribute e = new EmailAddressAttribute();
+        [Command("SetEmail")]
+        [Summary("Sets the global email of the user")]
+        public async Task SetEmail([Remainder]string email)
+        {
+            GlobalUser user = Program.globalUsers.FirstOrDefault(x => x.UserID == Context.User.Id);
+            if (email.Contains("@") && email.Contains(".") && e.IsValid(email))
+            {
+                user.email = email;
+                await ReplyAsync("Email Set to: " + email);
+                await user.SaveData().ConfigureAwait(false);
             }
         }
     }

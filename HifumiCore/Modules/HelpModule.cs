@@ -142,5 +142,12 @@ namespace DiscordGeneral.Modules
 
             await channel.SendMessageAsync("", false, builder.Build());
         }
+
+        [Command("github")]
+        [Summary("Gets the GitHub link of the project")]
+        public async Task GithubLink()
+        {
+            await ReplyAsync("Hifumi Project: https://github.com/ThomasAunvik/Hifumi-Bot");
+        }
     }
 }

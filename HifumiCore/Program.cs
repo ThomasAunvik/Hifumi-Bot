@@ -45,8 +45,6 @@ namespace Hifumi_Bot
 
         public static Timer stateTimer;
 
-        private EmailAddressAttribute e = new EmailAddressAttribute();
-
         public Task OnJoinedGuild(SocketGuild guild)
         {
             discordServers.Add(new DiscordServer(guild));
@@ -159,13 +157,6 @@ namespace Hifumi_Bot
                 {
                     await Responses.ILoveYou(user, arg);
                     return;
-                }
-
-                if (arg.Content.Contains("@") && arg.Content.Contains(".") && e.IsValid(arg.Content))
-                {
-                    user.email = arg.Content;
-                    await arg.Channel.SendMessageAsync("Email Set.");
-                    await user.SaveData().ConfigureAwait(false);
                 }
             };
             _client.MessageUpdated += OnMessageUpdated;

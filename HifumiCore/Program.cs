@@ -301,8 +301,7 @@ namespace Hifumi_Bot
             }
             else if (message.HasMentionPrefix(_client.CurrentUser, ref argPos))
             {
-                CleverbotResponse response = await cleverbot.GetResponseAsync(message.Content);
-                await message.Channel.SendMessageAsync(response.Response);
+                Modules.Talk.TalkWithBot(message);
             }
 
             AddPoints(message, server, user);

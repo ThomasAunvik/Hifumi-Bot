@@ -81,10 +81,15 @@ namespace Hifumi_Bot.Modules
         }
 
         [Command("Talk")]
-        public async Task TalkWithBot([Remainder] string message = "")
+        public void TalkWBot([Remainder] string message = "")
         {
-            Cleverbot.Net.CleverbotResponse response = await Program.cleverbot.GetResponseAsync(message);
-            await ReplyAsync(response.Response);
+            TalkWithBot(Context.Message);
+        }
+
+        public static async Task TalkWithBot(IMessage message)
+        {
+            Cleverbot.Net.CleverbotResponse response = await Program.cleverbot.GetResponseAsync(message.Content);
+            await message.Channel.SendMessageAsync(response.Response);
         }
     }
 }

@@ -39,7 +39,7 @@ namespace Hifumi_Bot.Modules
             }
         }
 
-        [Command("s")]
+        [Command("removeswear")]
         [Summary("Removes a swearword from the server's swearjar. (Manage Messages)")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task RemoveSwear(string word)

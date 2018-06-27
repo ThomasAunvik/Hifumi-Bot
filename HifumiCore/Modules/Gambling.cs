@@ -14,15 +14,23 @@ namespace Hifumi_Bot
 
         [Command("slot")]
         [Summary("Starts a slot.")]
-        public async Task Slot(float betPoints = 200)
+        public async Task Slot(float betPoints)
         {
             DiscordServer server = Program.discordServers.Find(x => x.Guild == Context.Guild);
-            if (betPoints < 200)
+            if (betPoints < server.minimumBetPoints)
             {
                 await ReplyAsync("You cant gamble less than + " + server.minimumBetPoints + " points!");
                 return;
             }
             await StartSlotting(betPoints);
+        }
+
+        [Command("slot")]
+        [Summary("Starts a slot.")]
+        public async Task Slot()
+        {
+            DiscordServer server = Program.discordServers.Find(x => x.Guild == Context.Guild);
+            await Slot(server.minimumBetPoints);
         }
 
         [Command("minimumbet")]

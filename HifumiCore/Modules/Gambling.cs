@@ -132,8 +132,6 @@ namespace Hifumi_Bot
                     (won ? "Won: " + (server.lootItems != null || server.lootItems.Count > 0 ? wonItem.Name : "Nothing") : "Lost: " + betPoints + " Points.")).Build();
 
             await ReplyAsync("", false, newEmbed);
-            
-            user.Points -= betPoints;
 
             GlobalUser gUser = Program.globalUsers.Find(x => x.UserID == Context.User.Id);
             if (won && server.lootItems.Count > 0)

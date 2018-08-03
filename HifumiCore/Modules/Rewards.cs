@@ -23,7 +23,7 @@ namespace Hifumi_Bot
         [Command("rewardlist")]
         public async Task Paginate()
         {
-            DiscordServer server = Program.discordServers.Find(x => x.Guild.Id == Context.Guild.Id);
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
             if (server != null)
             {
                 Console.WriteLine(server.lootItems.Count);
@@ -62,7 +62,7 @@ namespace Hifumi_Bot
         public async Task AddItem(string name, string description = "", string link = "")
         {
 
-            DiscordServer server = Program.discordServers.Find(x => x.Guild.Id == Context.Guild.Id);
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
             if (server != null)
             {
                 if (server.lootItems == null) server.lootItems = new List<LootItem>();
@@ -75,7 +75,7 @@ namespace Hifumi_Bot
         [RequireUserPermission(GuildPermission.Administrator)]
         public async Task RemoveItem(int index)
         {
-            DiscordServer server = Program.discordServers.Find(x => x.Guild.Id == Context.Guild.Id);
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
             if (server != null)
             {
                 if (server.lootItems != null || server.lootItems.Count > 0)

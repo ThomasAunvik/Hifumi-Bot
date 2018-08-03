@@ -5,6 +5,8 @@ using Discord.WebSocket;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+using Hifumi_Bot.Modules;
+
 namespace Hifumi_Bot
 {
     public class DiscordServer
@@ -18,6 +20,7 @@ namespace Hifumi_Bot
 
         //Savings
         public List<ServerUser> Users = new List<ServerUser>();
+        public List<VoiceChannelManager.VoiceChannelRole> voiceChannelRoles = new List<VoiceChannelManager.VoiceChannelRole>();
 
         public List<LootItem> lootItems = new List<LootItem>();
         public float minimumBetPoints = 10;
@@ -66,6 +69,8 @@ namespace Hifumi_Bot
                         swearJar = save.swearJar;
                     if (save.Users != null)
                         Users = save.Users;
+                    if (save.voiceChannelRoles != null)
+                        voiceChannelRoles = save.voiceChannelRoles;
 
                     if (save.lootItems != null) lootItems = save.lootItems;
 
@@ -100,6 +105,11 @@ namespace Hifumi_Bot
             if (File.Exists("DiscordServerFiles / " + guild.Id + ".json"))
                 File.Delete("DiscordServerFiles / " + guild.Id + ".json");
         }
+
+        public static DiscordServer GetServerFromID(ulong id)
+        {
+            return Program.discordServers.Find(x => x.Guild.Id == id);
+        }
     }
 
     public class SaveDiscordServer
@@ -119,6 +129,7 @@ namespace Hifumi_Bot
         public float minimumBetPoints;
 
         public List<ServerUser> Users;
+        public List<VoiceChannelManager.VoiceChannelRole> voiceChannelRoles;
 
         public SaveDiscordServer(DiscordServer server)
         {
@@ -134,6 +145,8 @@ namespace Hifumi_Bot
                     swearJar = server.swearJar;
                 if (server.Users != null)
                     Users = server.Users;
+                if (server.voiceChannelRoles != null)
+                    voiceChannelRoles = server.voiceChannelRoles;
                 if (server.WelcomeRole != null)
                     WelcomeRole = server.WelcomeRole.Id.ToString();
 

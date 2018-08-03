@@ -17,7 +17,7 @@ namespace Hifumi_Bot.Modules
         [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task AddSwear(string word)
         {
-            DiscordServer server = Program.discordServers.Find(x => x.Guild == Context.Guild);
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
             if (server != null)
             {
                 if (server.swearJar == null)
@@ -44,7 +44,7 @@ namespace Hifumi_Bot.Modules
         [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task RemoveSwear(string word)
         {
-            DiscordServer server = Program.discordServers.Find(x => x.Guild == Context.Guild);
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
             if (server != null)
             {
                 if (server.swearJar != null)

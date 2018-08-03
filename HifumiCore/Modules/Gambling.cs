@@ -16,7 +16,7 @@ namespace Hifumi_Bot
         [Summary("Starts a slot.")]
         public async Task Slot(float betPoints)
         {
-            DiscordServer server = Program.discordServers.Find(x => x.Guild == Context.Guild);
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
             if (betPoints < server.minimumBetPoints)
             {
                 await ReplyAsync("You cant gamble less than + " + server.minimumBetPoints + " points!");
@@ -29,7 +29,7 @@ namespace Hifumi_Bot
         [Summary("Starts a slot.")]
         public async Task Slot()
         {
-            DiscordServer server = Program.discordServers.Find(x => x.Guild == Context.Guild);
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
             await Slot(server.minimumBetPoints);
         }
 
@@ -38,7 +38,7 @@ namespace Hifumi_Bot
         [RequireUserPermission(GuildPermission.Administrator)]
         public async Task SetMinimumBetPoints(float points = 10)
         {
-            DiscordServer server = Program.discordServers.Find(x => x.Guild == Context.Guild);
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
             if (points > 0)
             {
                 server.minimumBetPoints = points;
@@ -71,7 +71,7 @@ namespace Hifumi_Bot
 
         public async Task StartSlotting(float betPoints)
         {
-            DiscordServer server = Program.discordServers.Find(x => x.Guild.Id == Context.Guild.Id);
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
             if (server == null) return;
 
             ServerUser user = server.Users.Find(x => x.userID == Context.User.Id);

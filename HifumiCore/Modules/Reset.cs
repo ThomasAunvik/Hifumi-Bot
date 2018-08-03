@@ -17,8 +17,8 @@ namespace Hifumi_Bot.Modules
         public async Task ResetServer()
         {
             IUserMessage message = await ReplyAsync("Reseting...");
-            DiscordServer server = Program.discordServers.Find(x => x.Guild.Id == Context.Guild.Id);
-            if(server != null)
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
+            if (server != null)
             {
                 server.Users = new List<ServerUser>();
                 foreach(SocketGuildUser user in server.Guild.Users)
@@ -37,8 +37,8 @@ namespace Hifumi_Bot.Modules
         [RequireUserPermission(GuildPermission.Administrator)]
         public void SaveAndLoad()
         {
-            DiscordServer server = Program.discordServers.Find(x => x.Guild.Id == Context.Guild.Id);
-            if(server != null)
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
+            if (server != null)
             {
                 server.SaveData();
                 server.LoadData();

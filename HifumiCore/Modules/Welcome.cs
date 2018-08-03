@@ -17,7 +17,7 @@ namespace Hifumi_Bot.Modules
         [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task SetWelcome(ISocketMessageChannel channel)
         {
-            DiscordServer server = Program.discordServers.Find(x => x.Guild == Context.Guild);
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
             server.WelcomeChannel = channel as SocketChannel;
             server.SaveData();
             await ReplyAsync("Welcome channel set to: " + ((SocketTextChannel)server.WelcomeChannel).Mention + "!");
@@ -28,8 +28,8 @@ namespace Hifumi_Bot.Modules
         [Summary("Says where the welcome channel is")]
         public async Task GetWelcome()
         {
-            DiscordServer server = Program.discordServers.Find(x => x.Guild == Context.Guild);
-            if(server != null)
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
+            if (server != null)
             {
                 if(server.WelcomeChannel != null)
                 {
@@ -47,8 +47,8 @@ namespace Hifumi_Bot.Modules
         {
             if(((SocketGuildUser)Context.User).GuildPermissions.Has(Discord.GuildPermission.ManageChannels))
             {
-                DiscordServer server = Program.discordServers.Find(x => x.Guild == Context.Guild);
-                if(mode == "get")
+                DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
+                if (mode == "get")
                 {
                     if(server.WelcomeRole != null)
                         await ReplyAsync("Current autorole is: " + server.WelcomeRole.Name + "!");
@@ -83,8 +83,8 @@ namespace Hifumi_Bot.Modules
         {
             if(((SocketGuildUser)Context.User).GuildPermissions.Has(Discord.GuildPermission.ManageRoles))
             {
-                DiscordServer server = Program.discordServers.Find(x => x.Guild == Context.Guild);
-                if(server != null)
+                DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
+                if (server != null)
                 {
                     SocketRole FoundRole = null;
                     foreach(SocketRole role in Context.Guild.Roles)
@@ -115,8 +115,8 @@ namespace Hifumi_Bot.Modules
         {
             if(((SocketGuildUser)Context.User).GuildPermissions.Has(Discord.GuildPermission.Administrator))
             {
-                DiscordServer server = Program.discordServers.Find(x => x.Guild == Context.Guild);
-                if(server != null)
+                DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
+                if (server != null)
                 {
                     server.swearing = value;
                     server.SaveData();

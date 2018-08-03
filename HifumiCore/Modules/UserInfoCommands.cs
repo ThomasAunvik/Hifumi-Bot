@@ -14,9 +14,10 @@ namespace Hifumi_Bot.Modules
     {
         [Command("points")]
         [Summary("Checks how many point you have in the current server.")]
-        public async Task Points(string mention = "") {
-            DiscordServer server = Program.discordServers.Find(x => x.Guild.Id == Context.Guild.Id);
-            if(server != null)
+        public async Task Points(string mention = "")
+        {
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
+            if (server != null)
             {
                 ServerUser user = null;
                 if(Context.Message.MentionedUsers.Count > 0)
@@ -40,8 +41,8 @@ namespace Hifumi_Bot.Modules
         {
             try
             {
-                DiscordServer server = Program.discordServers.Find(x => x.Guild.Id == Context.Guild.Id);
-                if(server != null)
+                DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
+                if (server != null)
                 {
                     ServerUser user = server.Users.Find(x => x.userID == Context.User.Id);
                     if(user != null)
@@ -93,8 +94,8 @@ namespace Hifumi_Bot.Modules
         [RequireBotPermission(GuildPermission.ManageRoles)]
         public async Task ClearBadStuff(SocketGuildUser inputUser)
         {
-            DiscordServer server = Program.discordServers.Find(x => x.Guild.Id == Context.Guild.Id);
-            if(server != null)
+            DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
+            if (server != null)
             {
                 ServerUser user = server.Users.Find(x => x.userID == inputUser.Id);
                 if(user != null)

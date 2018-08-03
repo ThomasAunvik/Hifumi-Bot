@@ -53,7 +53,7 @@ namespace Hifumi_Bot
 
         public Task OnLeftGuild(SocketGuild guild)
         {
-            DiscordServer server = discordServers.Find(x => x.Guild == guild);
+            DiscordServer server = DiscordServer.GetServerFromID(guild.Id);
             if (server != null)
             {
                 DiscordServer.DeleteServerFile(guild);
@@ -80,7 +80,7 @@ namespace Hifumi_Bot
 
         public Task OnUserJoined(SocketGuildUser user)
         {
-            DiscordServer server = discordServers.Find(x => x.Guild == user.Guild);
+            DiscordServer server = DiscordServer.GetServerFromID(user.Guild.Id);
             if (server != null)
             {
                 ((SocketTextChannel)server.WelcomeChannel).SendMessageAsync("Welcome to the server " + user.Mention + "!");
@@ -161,6 +161,9 @@ namespace Hifumi_Bot
             };
             _client.MessageUpdated += OnMessageUpdated;
             _client.LatencyUpdated += OnUpdate;
+
+            _client.UserVoiceStateUpdated += Modules.VoiceChannelManager.OnUserJoinedVC;
+            _client.ChannelDestroyed += Modules.VoiceChannelManager.CheckVoiceChannelOnDelete;
 
             await RegisterCommandsAsync();
             

@@ -10,12 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Addons\Paginator\src\**" />
-    <EmbeddedResource Remove="Addons\Paginator\src\**" />
-    <None Remove="Addons\Paginator\src\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Images\Reactions\hifumi_pale.png" />
   </ItemGroup>
 

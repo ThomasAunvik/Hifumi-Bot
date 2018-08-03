@@ -11,7 +11,6 @@ namespace Hifumi_Bot
 {
     public class Gambling : ModuleBase<SocketCommandContext>
     {
-
         [Command("slot")]
         [Summary("Starts a slot.")]
         public async Task Slot(float betPoints)
@@ -101,15 +100,11 @@ namespace Hifumi_Bot
                     rolls[three[2]]
                 };
             bool won = false;
-            if(selectedRoll[0] == selectedRoll[1] && selectedRoll[0] == selectedRoll[2])
-            {
+            if(selectedRoll[0] == selectedRoll[1] && selectedRoll[0] == selectedRoll[2]) {
                 won = true;
-            }else if(selectedRoll[3] == selectedRoll[4] && selectedRoll[3] == selectedRoll[5])
-            {
+            }else if(selectedRoll[3] == selectedRoll[4] && selectedRoll[3] == selectedRoll[5]) {
                 won = true;
-            }
-            else if(selectedRoll[6] == selectedRoll[7] && selectedRoll[6] == selectedRoll[8])
-            {
+            }else if(selectedRoll[6] == selectedRoll[7] && selectedRoll[6] == selectedRoll[8]) {
                 won = true;
             }
 

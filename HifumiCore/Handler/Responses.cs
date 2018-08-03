@@ -34,50 +34,40 @@ namespace Hifumi_Bot
             if(!user.boolIsChattingWithBot)
             {
                 user.boolIsChattingWithBot = true;
-                if(user.saidLoveYou <= 0)
-                {
+                if(user.saidLoveYou <= 0) {
                     user.saidLoveYou++;
                     await SpeakWithUser(arg, "Hmm", 2000, 1000);
                     await SpeakWithUser(arg, "You're not the first one to say that.", 500, 4000);
                     await SpeakWithUser(arg, "Try to focus on learning... but just between the two of us..", 750, 5000);
                     await SpeakWithUser(arg, "I love you too", 2000, 2000);
-                }else if(user.saidLoveYou == 1)
-                {
+                }else if(user.saidLoveYou == 1) {
                     user.saidLoveYou++;
                     await SpeakWithUser(arg, "y-you already told me that, I know", 1000, 2000);
-                }else if(user.saidLoveYou == 2)
-                {
+                }else if(user.saidLoveYou == 2) {
                     user.saidLoveYou++;
                     await SpeakWithUser(arg, "please stop", 1000, 2000);
-                } else if(user.saidLoveYou == 3)
-                {
+                } else if(user.saidLoveYou == 3) {
                     user.saidLoveYou++;
                     await SpeakWithUser(arg, "say that one more time I'm blocking you", 1000, 2000);
-                } else if(user.saidLoveYou == 4)
-                {
+                } else if(user.saidLoveYou == 4) {
                     user.saidLoveYou++;
                     await SpeakWithUser(arg, "I'm blocking you now goodbye", 1000, 2000);
 
-                } else if(user.saidLoveYou == 5 || user.saidLoveYou == 6)
-                {
+                } else if(user.saidLoveYou == 5 || user.saidLoveYou == 6) {
                     user.saidLoveYou++;
                     await SpeakWithUser(arg, "I don't care", 1000, 2000);
-                } else if(user.saidLoveYou == 7)
-                {
+                } else if(user.saidLoveYou == 7) {
                     user.saidLoveYou++;
                     await SpeakWithUser(arg, "I told you before I don't care", 1000, 2000);
-                } else if(user.saidLoveYou == 8)
-                {
+                } else if(user.saidLoveYou == 8) {
                     user.saidLoveYou++;
                     await SpeakWithUser(arg, "please stop", 1000, 2000);
-                } else if(user.saidLoveYou == 9)
-                {
+                } else if(user.saidLoveYou == 9) {
                     user.saidLoveYou++;
                     await SpeakWithUser(arg, "I'm blocking you", 1000, 2000);
                 }
                 user.boolIsChattingWithBot = false;
             }
-
         }
         private static async Task SpeakWithUser(SocketMessage arg, string text, int timeWait, int timeWrite)
         {

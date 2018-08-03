@@ -11,7 +11,6 @@ namespace Hifumi_Bot.Modules
 {
     public class Welcome : ModuleBase<SocketCommandContext>
     {
-
         [Command("setwelcome")]
         [Summary("Sets the welcome channel to a specific channel. (Manage Channels)")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
@@ -34,8 +33,7 @@ namespace Hifumi_Bot.Modules
                 if(server.WelcomeChannel != null)
                 {
                     await ReplyAsync("Welcome channel is: " + ((SocketTextChannel)server.WelcomeChannel).Mention);
-                } else
-                {
+                } else {
                     await ReplyAsync("There is no welcome channel set.");
                 }
             }
@@ -45,36 +43,41 @@ namespace Hifumi_Bot.Modules
         [Summary("Sets and gets the stuff for autorole. (Manage Channels)")]
         public async Task AutoRole(string mode = "get", string parameter = "")
         {
-            if(((SocketGuildUser)Context.User).GuildPermissions.Has(Discord.GuildPermission.ManageChannels))
+            if (((SocketGuildUser)Context.User).GuildPermissions.Has(Discord.GuildPermission.ManageChannels))
             {
                 DiscordServer server = DiscordServer.GetServerFromID(Context.Guild.Id);
                 if (mode == "get")
                 {
-                    if(server.WelcomeRole != null)
+                    if (server.WelcomeRole != null)
                         await ReplyAsync("Current autorole is: " + server.WelcomeRole.Name + "!");
                     else
                         await ReplyAsync("There is no role set.");
-                } else if(mode == "set")
+                }
+                else if (mode == "set")
                 {
                     SocketRole FoundRole = null;
-                    foreach(SocketRole role in Context.Guild.Roles)
+                    foreach (SocketRole role in Context.Guild.Roles)
                     {
-                        if(role.Name == parameter)
+                        if (role.Name == parameter)
                         {
                             FoundRole = role;
                             break;
-                        }   
+                        }
                     }
-                    if(FoundRole != null)
+                    if (FoundRole != null)
                     {
                         server.WelcomeRole = FoundRole;
                         server.SaveData();
                         await ReplyAsync("Auto-Role set to: " + server.WelcomeRole.Name + "!");
-                    } else
+                    }
+                    else
                         await ReplyAsync("There is no role such as " + parameter);
                 }
-            } else
+            }
+            else
+            {
                 await ReplyAsync("You dont have sufficient permissions to set the welcome channel!");
+            }
         }
 
         [Command("setmute")]
@@ -95,15 +98,19 @@ namespace Hifumi_Bot.Modules
                             break;
                         }
                     }
-                    if(FoundRole != null)
+                    if (FoundRole != null)
                     {
                         server.MuteRole = FoundRole;
                         server.SaveData();
                         await ReplyAsync("Mute Role set to: " + server.MuteRole.Name + "!");
-                    } else
+                    }
+                    else
+                    {
                         await ReplyAsync("There is no role such as " + parameter);
+                    }
                 }
-            } else
+            }
+            else
             {
                 await ReplyAsync("You dont have sufficient permissions to set the mute role!");
             }

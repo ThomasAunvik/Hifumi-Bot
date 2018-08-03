@@ -1,5 +1,4 @@
 ﻿using Discord.WebSocket;
-using Hifumi_Bot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -119,7 +118,7 @@ namespace Discord.Addons.Paginator
         {
             Pages = pages;
             Title = title;
-            EmbedColor = Program.embedColor;
+            EmbedColor = embedColor ?? Color.Default;
             User = user;
             CurrentPage = 1;
         }

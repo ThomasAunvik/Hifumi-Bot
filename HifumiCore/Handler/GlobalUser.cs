@@ -10,11 +10,8 @@ using System.Threading.Tasks;
 
 namespace Hifumi_Bot
 {
-
-
     public class GlobalUser
     {
-
         public SaveDiscordUser savedUser;
         public string Username;
 
@@ -68,7 +65,6 @@ namespace Hifumi_Bot
             if(stream != null)
                 stream.Close();
             File.WriteAllText("DiscordUserFiles/" + UserID + ".json", jsonFormatted);
-
         }
 
         public static void DeleteServerFile(SocketUser user)
@@ -76,8 +72,8 @@ namespace Hifumi_Bot
             if(File.Exists("DiscordUserFiles / " + user.Id + ".json"))
                 File.Delete("DiscordUserFiles / " + user.Id + ".json");
         }
-        
     }
+
     public class SaveDiscordUser
     {
         public string Username;
@@ -94,6 +90,5 @@ namespace Hifumi_Bot
                 email = user.email;
             }
         }
-
     }
 }

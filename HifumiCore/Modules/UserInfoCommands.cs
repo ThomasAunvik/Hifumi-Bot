@@ -26,12 +26,10 @@ namespace Hifumi_Bot.Modules
                 if(user != null)
                 {
                     await ReplyAsync(Context.User.Mention + ". " + user.username + " have " + user.Points + " points!");
-                } else
-                {
+                } else {
                     await ReplyAsync("Something went wrong!");
                 }
             }
-
         }
 
         [Command("leaderboard")]
@@ -76,9 +74,7 @@ namespace Hifumi_Bot.Modules
                         embedBuilder.AddField("Your rank: " + (userRank + 1), "Points: " + user.Points);
 
                         await ReplyAsync("", false, embedBuilder.Build());
-
-                    } else
-                    {
+                    } else {
                         server.Users.Add(new ServerUser((SocketGuildUser)Context.User));
                     }
                 }
